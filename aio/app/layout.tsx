@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localfont from "next/font/local";
 import "./globals.css";
+import Navbar from "./components/navbar";
 
 const ProductSans = localfont({
   src: [
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body
         className={`${ProductSans.variable} antialiased`}
       >
+        <Navbar></Navbar>
         {children}
       </body>
     </html>

@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+html, 
+body {
+    height: 95%;
+    font-family: var(--font-product-sans)
+}
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -65,9 +70,8 @@
   }
 }
 
-body {
-  font-family: var(--font-product-sans), sans-serif;
-}
+
+
 
 @layer utilities {
   .heading{
