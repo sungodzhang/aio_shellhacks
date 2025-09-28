@@ -56,7 +56,7 @@ export default function Navbar() {
         
         <ul className="flex gap-10">
           <Link href={"/"} className="button hover:bg-blue-400 px-3 py-2">Home</Link>
-          <Link href={"/"} className="button hover:bg-amber-400 px-3 py-2">About</Link>
+          <Link href={"/about"} className="button hover:bg-amber-400 px-3 py-2">About</Link>
           <Link href={"/"} className="button hover:bg-red-500 px-3 py-2">History</Link>
         </ul>
         
