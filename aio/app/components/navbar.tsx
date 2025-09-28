@@ -5,6 +5,9 @@ import Image from "next/image";
 import { useRouter } from 'next/navigation';
 import { supabase } from './supabase'; 
 
+
+
+
 export default function Navbar() {
   const [isSignedIn, setIsSignedIn] = useState(false);
    
@@ -39,6 +42,7 @@ export default function Navbar() {
         redirectTo: ``,
       },
     });
+
   };
 
   const handleSignOut = async () => {

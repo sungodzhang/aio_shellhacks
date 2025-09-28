@@ -6,4 +6,5 @@ app = FastAPI()
 async def root(): 
     
     
-@app.get("/provide_examples")
+@app.get("/provide_examples"):
+    

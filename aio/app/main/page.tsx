@@ -6,13 +6,85 @@ import Image from 'next/image';
 import { supabase } from "@/app/components/supabase";
 import { createDraggable, animate, createSpring } from "animejs";
 
-async function getAIResponse(message) {
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    return `This is a simulated AI response to: "${message}"`;
+interface RequestPayload {
+  app_name: string;
+  user_id: string;
+  session_id: string;
+  new_message: {
+    role: 'user';
+    parts: { text: string }[];
+  };
 }
 
 
+async function getAIResponse(message : string,conversation_id : string, user_id : string) {
+  const url = 'http://127.0.0.1:8000/run';
 
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      
+      body: JSON.stringify(
+        {
+            'app_name': 'education_agent',
+            'user_id': `${user_id}`,
+            'session_id': `${conversation_id}`,
+            'new_message': {
+            'role': 'user',
+                'parts': [{
+                'text': `${message}`
+            }]
+      }}),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const responseData = await response.json(); // Parse the JSON response
+    console.log('Success:', responseData);
+    return responseData;
+
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+
+async function updateSessionState(user_id : string, conversation_id: string) {
+  const url = `http://localhost:8000/apps/education_agent/users/${user_id}/sessions/${conversation_id}`;
+
+  const requestBody = {
+    state: {
+      key1: 'value1',
+      key2: 42
+    }
+  };
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestBody),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+    console.log('Success:', responseData);
+    return responseData;
+
+  } catch (error) {
+    console.error('Error making the request:', error);
+  }
+}
 
 function MainPage(){
     const router = useRouter();
@@ -153,7 +225,7 @@ function MainPage(){
         setNewMessage(""); // Clear input immediately
 
         try {
-            const aiResponseContent = await getAIResponse(userMessageContent);
+            const aiResponseContent = await getAIResponse(user?.id, userMessageContent,currentConversationId);
             const aiMessage = {
                 conversation_id: currentConversationId,
                 role: 'assistant',
@@ -209,6 +281,7 @@ function MainPage(){
             setConversations([data, ...conversations]);
             setActiveConversationId(data.id);
             setMessages([]); // Clear messages for the new chat
+            updateSessionState(user?.id, activeConversationId);
             return data.id;
         }
     };
