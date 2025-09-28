@@ -52,7 +52,7 @@ export default function Navbar() {
         
         <ul className="flex gap-10">
           <Link href={"/"} className="button px-3 py-2">Home</Link>
-          <Link href={"/"} className="button px-3 py-2">About</Link>
+          <Link href={"/about"} className="button px-3 py-2">About</Link>
           <Link href={"/"} className="button px-3 py-2">History</Link>
         </ul>
         
