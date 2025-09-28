@@ -79,7 +79,7 @@ body {
   }
   
   .button{
-    @apply border-4 border-black rounded-2xl font-bold transition-all hover:bg-amber-100 hover:scale-110
+    @apply border-4 border-black rounded-2xl font-bold transition-all hover:scale-110
   }
 
   .chat-form{

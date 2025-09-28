@@ -9,7 +9,7 @@ export default function Navbar() {
   const [isSignedIn, setIsSignedIn] = useState(false);
    
   const router = useRouter();
-
+    
   useEffect(() => {
     const checkSession = async () => {
       const { data: { user } } = await supabase.auth.getUser();
@@ -51,9 +51,9 @@ export default function Navbar() {
         <Image src="/logo.png" alt="logo" width={50} height={50} className="m-4"/>
         
         <ul className="flex gap-10">
-          <Link href={"/"} className="button px-3 py-2">Home</Link>
-          <Link href={"/"} className="button px-3 py-2">About</Link>
-          <Link href={"/"} className="button px-3 py-2">History</Link>
+          <Link href={"/"} className="button hover:bg-blue-400 px-3 py-2">Home</Link>
+          <Link href={"/"} className="button hover:bg-amber-400 px-3 py-2">About</Link>
+          <Link href={"/"} className="button hover:bg-red-500 px-3 py-2">History</Link>
         </ul>
         
         <button
