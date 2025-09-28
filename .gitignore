@@ -46,3 +46,8 @@ next-env.d.ts
 backend/.venv
 backend/multi_tool_agent/.env
 backend/multi_tool_agent/__pycache__
+
+# new agent
+education_agent/__pycache__
+education_agent/test.py
+education_agent/.env
